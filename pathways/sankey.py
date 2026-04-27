@@ -74,11 +74,8 @@ name_to_color = { # Key by group name for easier identification
     "OviDN": {"line": "blue", "arrow": "rgba(0, 255, 0, 0.5)"}
 }
 
-print(labels)
 node_colors = [name_to_color.get(label, {"line": "grey"})['line'] for label in labels]
 arrow_colors = [name_to_color.get(labels[src], {"arrow": "rgba(128, 128, 128, 0.5)"})['arrow'] for src in source]
-print(node_colors)
-print(arrow_colors)
 
 # Create and display the Sankey
 fig = go.Figure(data=[go.Sankey(
@@ -99,5 +96,6 @@ fig = go.Figure(data=[go.Sankey(
 )])
 
 fig.update_layout(title_text="Refined Neuron Pathway Sankey Diagram", font_size=10)
-fig.show().write_html('out/sankey.html')
+fig.write_html('out/sankey.html')
+fig.show()
 # print(value)
