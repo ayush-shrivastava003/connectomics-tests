@@ -1,7 +1,15 @@
 from json import dump, load
 import pandas as pd
 
-def pathways(three_hops = False):
+with open('data/groups.json', 'r') as f:
+    groups = load(f)
+
+neuron_to_group = {}
+for group_name, neuron_ids in groups.items():
+    for neuron_id in neuron_ids:
+        neuron_to_group[neuron_id] = group_name
+
+def get_pathways(three_hops = False):
     from fafbseg import flywire
     neurons = load(open('data/groups.json', 'r'))
 
@@ -9,10 +17,17 @@ def pathways(three_hops = False):
         neurons['Ir94e'],
         downstream=True,
         filtered=True,
-        materialization=783
+        materialization=783,
     )
 
-    start = start[start['weight'] >= 5]
+    start['pre_group'] = start['pre'].map(neuron_to_group)
+    start['post_group'] = start['post'].map(neuron_to_group)
+    
+    # Only include neurons that are of different groups, connected by at least 5 synapses, and begin with Ir94e
+    # Takes the df length down from 8606 neurons to only 175
+    start = start[(start['weight'] >= 5) & (start['pre_group'] != start['post_group']) & (start['pre_group'] == "Ir94e")]
+    # start = start[(start['weight'] >= 5) & (start['pre_group'] != start['post_group'])]
+
 
     # SUPER TIME INTENSIVE STEP!!
     if three_hops:    
@@ -46,16 +61,8 @@ def pathways(three_hops = False):
 def organize_hops():
     three = pd.read_csv('data/three.csv')
 
-    with open('data/groups.json', 'r') as f:
-        groups = load(f)
-
-    neuron_to_group = {}
-    for group_name, neuron_ids in groups.items():
-        for neuron_id in neuron_ids:
-            neuron_to_group[neuron_id] = group_name
-
-    three['pre_start_group'] = three['pre'].map(neuron_to_group) # Ir94e
-    three['post_start_group'] = three['post'].map(neuron_to_group) # GNG.SLP, Earmuff
+    three['pre_start_group'] = three['pre_group'] # Ir94e
+    three['post_start_group'] = three['post_group'] # GNG.SLP, Earmuff
     three['post_middle_group'] = three['post_x'].map(neuron_to_group) # interneuron
     three['post_end_group'] = three['post_y'].map(neuron_to_group) # OviDN
     three = three[(three['pre_start_group'] != three['post_start_group']) & (three['post_end_group'] == 'OviDN')]
@@ -140,8 +147,6 @@ def find_unknown_neurons():
         # Save the updated dataframe back to the original CSV file
         df.to_csv(file, index=False)
 
-    
-
-pathways(three_hops=True)
+get_pathways(three_hops=True)
 organize_hops()
 find_unknown_neurons()
