@@ -16,6 +16,7 @@ def get_pathways(three_hops = False):
     start = flywire.synapses.get_connectivity(
         neurons['Ir94e'],
         downstream=True,
+        upstream=False,
         filtered=True,
         materialization=783,
     )
@@ -25,8 +26,9 @@ def get_pathways(three_hops = False):
     
     # Only include neurons that are of different groups, connected by at least 5 synapses, and begin with Ir94e
     # Takes the df length down from 8606 neurons to only 175
-    start = start[(start['weight'] >= 5) & (start['pre_group'] != start['post_group']) & (start['pre_group'] == "Ir94e")]
-    # start = start[(start['weight'] >= 5) & (start['pre_group'] != start['post_group'])]
+    # start = start[(start['weight'] >= 5) & (start['pre_group'] != start['post_group']) & (start['pre_group'] == "Ir94e")]
+    print(len(start[start['weight'] >= 5]))
+    start = start[(start['weight'] >= 5) & (start['pre_group'] != start['post_group'])]
 
 
     # SUPER TIME INTENSIVE STEP!!
@@ -34,6 +36,7 @@ def get_pathways(three_hops = False):
         middle = flywire.synapses.get_connectivity(
             start['post'].tolist(),
             downstream=True,
+            upstream=False,
             filtered=True,
             materialization=783
     )
@@ -41,6 +44,7 @@ def get_pathways(three_hops = False):
     end = flywire.synapses.get_connectivity(
         neurons["OviDN"],
         upstream=True,
+        downstream=False,
         filtered=True,
         materialization=783
     )
@@ -55,7 +59,7 @@ def get_pathways(three_hops = False):
         two_to_three = middle.merge(end, left_on='post', right_on='pre', how='inner')
         two_to_three = two_to_three[(two_to_three['weight_x'] >= 5)]
         three = start.merge(two_to_three, left_on='post', right_on='pre_x', how='inner')
-        three = three[(three['weight'] >= 5) & (three['weight_x'] >= 5) & (three['weight_y'] >= 5)]
+        three = three[(three['weight'] >= 5) & (three['weight_x'] >= 5) & (three['weight_y'] >= 5)].drop_duplicates()
         three.to_csv('data/three.csv', index=False)
 
 def organize_hops():

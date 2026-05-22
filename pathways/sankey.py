@@ -10,27 +10,28 @@ for i in range(1, 4):
 combined_df = pd.concat(dfs, ignore_index=True)
 
 # Read and process two-hop data
-two_df = pd.read_csv('data/two.csv')
-two_connections = []
-for _, row in two_df.iterrows():
-    two_connections.append({
-        'from_group': row['pre_group'],
-        'to_group': row['post_group'],
-        'weight': row['weight_x']
-    })
-    two_connections.append({
-        'from_group': row['post_group'],
-        'to_group': 'OviDN',  # Assuming 'end' is OviDN
-        'weight': row['weight_y']
-    })
+# two_df = pd.read_csv('data/two.csv')
+# two_connections = []
+# for _, row in two_df.iterrows():
+#     two_connections.append({
+#         'from_group': row['pre_group'],
+#         'to_group': row['post_group'],
+#         'weight': row['weight_x']
+#     })
+#     two_connections.append({
+#         'from_group': row['post_group'],
+#         'to_group': 'OviDN',  # Assuming 'end' is OviDN
+#         'weight': row['weight_y']
+#     })
 
-two_df_processed = pd.DataFrame(two_connections)
+# two_df_processed = pd.DataFrame(two_connections)
 
 # Concatenate with the three-hop data
-combined_df = pd.concat([combined_df, two_df_processed], ignore_index=True)
+# combined_df = pd.concat([combined_df, two_df_processed], ignore_index=True).drop_duplicates()
 
 # Aggregate synapse counts across all data
 aggregated = combined_df.groupby(['from_group', 'to_group'])['weight'].sum().reset_index()
+aggregated.to_csv('comb.csv')
 
 # Build global labels
 name_to_idx = {}

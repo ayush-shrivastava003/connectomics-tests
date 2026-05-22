@@ -1,0 +1,36 @@
+,from_group,to_group,weight
+0,Earmuff,OviDN,87
+1,Earmuff,Stanley ACh interneuron,7
+2,Earmuff,hop 2 acetylcholine interneuron,275
+3,Earmuff,hop 2 gaba interneuron,16
+4,GNG.SLP.T1 (L),Stanley ACh interneuron,78
+5,GNG.SLP.T1 (L),Stanley Glu interneuron,13
+6,GNG.SLP.T1 (L),hop 2 glutamate interneuron,6
+7,GNG.SLP.T1 (R),Stanley ACh interneuron,33
+8,GNG.SLP.T1 (R),Stanley Glu interneuron,8
+9,GNG.SLP.T1 (R),hop 2 glutamate interneuron,5
+10,GNG.SLP.T2 (L),Stanley Glu interneuron,37
+11,GNG.SLP.T2 (R),Stanley Glu interneuron,24
+12,Ir94e,Earmuff,20
+13,Ir94e,GNG.SLP.T1 (L),173
+14,Ir94e,GNG.SLP.T1 (R),178
+15,Ir94e,GNG.SLP.T2 (L),17
+16,Ir94e,GNG.SLP.T2 (R),22
+17,Ir94e,hop 1 acetylcholine interneuron,221
+18,Ir94e,hop 1 gaba interneuron,1347
+19,Ir94e,hop 1 glutamate interneuron,5
+20,Stanley ACh interneuron,OviDN,112
+21,Stanley Glu interneuron,OviDN,32
+22,hop 1 acetylcholine interneuron,Earmuff,29
+23,hop 1 acetylcholine interneuron,Stanley ACh interneuron,6
+24,hop 1 acetylcholine interneuron,hop 2 acetylcholine interneuron,13
+25,hop 1 acetylcholine interneuron,hop 2 gaba interneuron,68
+26,hop 1 gaba interneuron,Earmuff,22
+27,hop 1 gaba interneuron,hop 2 acetylcholine interneuron,255
+28,hop 1 gaba interneuron,hop 2 gaba interneuron,115
+29,hop 1 gaba interneuron,hop 2 glutamate interneuron,109
+30,hop 1 glutamate interneuron,hop 2 acetylcholine interneuron,5
+31,hop 1 glutamate interneuron,hop 2 gaba interneuron,16
+32,hop 2 acetylcholine interneuron,OviDN,233
+33,hop 2 gaba interneuron,OviDN,229
+34,hop 2 glutamate interneuron,OviDN,48
