@@ -15,7 +15,6 @@ def get_pathways(three_hops = False):
 
     start = flywire.synapses.get_connectivity(
         neurons['Ir94e'],
-        downstream=True,
         upstream=False,
         filtered=True,
         materialization=783,
@@ -35,25 +34,22 @@ def get_pathways(three_hops = False):
     if three_hops:    
         middle = flywire.synapses.get_connectivity(
             start['post'].tolist(),
-            downstream=True,
             upstream=False,
             filtered=True,
             materialization=783
-    )
+        ).query('weight >= 5')
 
     end = flywire.synapses.get_connectivity(
         neurons["OviDN"],
-        upstream=True,
         downstream=False,
         filtered=True,
         materialization=783
-    )
+    ).query('weight >= 5')
 
-
-    two = start.merge(end, left_on='post', right_on='pre', how='inner')
-    two = two[(two['weight_x'] >= 5) & (two['weight_y'] >= 5)]
-    two = two.rename(columns={'pre_x': 'start', 'post_x': 'middle', 'post_y': 'end'})
-    two.to_csv('data/two.csv', index=False)
+    # two = start.merge(end, left_on='post', right_on='pre', how='inner')
+    # two = two[(two['weight_x'] >= 5) & (two['weight_y'] >= 5)]
+    # two = two.rename(columns={'pre_x': 'start', 'post_x': 'middle', 'post_y': 'end'})
+    # two.to_csv('data/two.csv', index=False)
 
     if three_hops:
         two_to_three = middle.merge(end, left_on='post', right_on='pre', how='inner')

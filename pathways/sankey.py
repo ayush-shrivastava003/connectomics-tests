@@ -3,7 +3,7 @@ import pandas as pd
 
 # Read and concatenate all hop files
 dfs = []
-for i in range(1, 4):
+for i in range(1, 5):
     df = pd.read_csv(f'out/hop_{i}.csv')
     dfs.append(df)
 
@@ -68,15 +68,28 @@ name_to_color = { # Key by group name for easier identification
     "Stanley ACh interneuron": {"line": "red", "arrow": "rgba(0, 255, 0, 0.5)"},
     "hop 1 gaba interneuron": {"line": "yellow", "arrow": "rgba(255, 0, 0, 0.5)"},
     "hop 2 gaba interneuron": {"line": "red", "arrow": "rgba(255, 0, 0, 0.5)"},
+    "hop 3 gaba interneuron": {"line": "green", "arrow": "rgba(255, 0, 0, 0.5)"},
     "hop 1 acetylcholine interneuron": {"line": "yellow", "arrow": "rgba(0, 255, 0, 0.5)"},
     "hop 2 acetylcholine interneuron": {"line": "red", "arrow": "rgba(0, 255, 0, 0.5)"},
+    "hop 3 acetylcholine interneuron": {"line": "green", "arrow": "rgba(0, 255, 0, 0.5)"},
     "hop 1 glutamate interneuron": {"line": "yellow", "arrow": "rgba(255, 0, 0, 0.5)"},
     "hop 2 glutamate interneuron": {"line": "red", "arrow": "rgba(255, 0, 0, 0.5)"},
-    "OviDN": {"line": "blue", "arrow": "rgba(0, 255, 0, 0.5)"}
+    "hop 3 glutamate interneuron": {"line": "green", "arrow": "rgba(255, 0, 0, 0.5)"},
+    "hop 1 dopamine interneuron": {"line": "yellow", "arrow": "rgba(255, 165, 0, 0.5)"},
+    "hop 2 dopamine interneuron": {"line": "red", "arrow": "rgba(255, 165, 0, 0.5)"},
+    "hop 3 dopamine interneuron": {"line": "green", "arrow": "rgba(255, 165, 0, 0.5)"},
+    "hop 1 serotonin interneuron": {"line": "yellow", "arrow": "rgba(255, 192, 203, 0.5)"},
+    "hop 2 serotonin interneuron": {"line": "red", "arrow": "rgba(255, 192, 203, 0.5)"},
+    "hop 3 serotonin interneuron": {"line": "green", "arrow": "rgba(255, 192, 203, 0.5)"},
+    "hop 2 octopamine interneuron": {"line": "red", "arrow": "rgba(173, 255, 47, 0.5)"},
+    "OviDN": {"line": "blue", "arrow": "rgba(0, 255, 0, 0.5)"},
+    "Sugar GRNs": {"line": "purple", "arrow": "rgba(0, 255, 0, 0.5)"}, # Note: 720575940623172843 is actually GLU, but all the rest are ACH
+    "IPCs": {"line": "blue", "arrow": "rgba(0, 255, 255, 0.5)"}, # Unknown NT type
 }
 
 node_colors = [name_to_color.get(label, {"line": "grey"})['line'] for label in labels]
 arrow_colors = [name_to_color.get(labels[src], {"arrow": "rgba(128, 128, 128, 0.5)"})['arrow'] for src in source]
+print(name_to_idx, labels)
 
 # Create and display the Sankey
 fig = go.Figure(data=[go.Sankey(

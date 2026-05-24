@@ -1,53 +1,174 @@
 from,to,weight,from_group,to_group
-720575940637686750,720575940632512156,13,hop 2 gaba interneuron,OviDN
-720575940635807130,720575940620625880,20,hop 2 gaba interneuron,OviDN
-720575940635807130,720575940627921182,5,hop 2 gaba interneuron,OviDN
-720575940621698542,720575940620625880,9,Stanley ACh interneuron,OviDN
-720575940631371991,720575940627921182,8,Stanley Glu interneuron,OviDN
-720575940631371991,720575940621257340,7,Stanley Glu interneuron,OviDN
-720575940616187754,720575940620625880,23,Stanley ACh interneuron,OviDN
-720575940616187754,720575940632512156,9,Stanley ACh interneuron,OviDN
-720575940604395436,720575940621257340,7,Stanley ACh interneuron,OviDN
-720575940604395436,720575940620625880,6,Stanley ACh interneuron,OviDN
-720575940604395436,720575940642312136,5,Stanley ACh interneuron,OviDN
-720575940624007207,720575940627921182,5,hop 2 glutamate interneuron,OviDN
-720575940637878854,720575940621257340,9,Stanley ACh interneuron,OviDN
-720575940637878854,720575940632512156,9,Stanley ACh interneuron,OviDN
-720575940637878854,720575940620625880,8,Stanley ACh interneuron,OviDN
-720575940637878854,720575940627921182,6,Stanley ACh interneuron,OviDN
-720575940617406548,720575940620625880,13,Stanley ACh interneuron,OviDN
-720575940617406548,720575940632512156,8,Stanley ACh interneuron,OviDN
-720575940637861294,720575940642312136,7,Stanley Glu interneuron,OviDN
-720575940612490958,720575940627921182,92,hop 2 acetylcholine interneuron,OviDN
-720575940612490958,720575940642312136,36,hop 2 acetylcholine interneuron,OviDN
-720575940612490958,720575940621257340,20,hop 2 acetylcholine interneuron,OviDN
-720575940629013199,720575940632512156,37,hop 2 gaba interneuron,OviDN
-720575940629013199,720575940642312136,8,hop 2 gaba interneuron,OviDN
-720575940629861163,720575940620625880,56,Earmuff,OviDN
-720575940629861163,720575940621257340,21,Earmuff,OviDN
-720575940629861163,720575940627921182,10,Earmuff,OviDN
-720575940622319715,720575940627921182,5,hop 2 gaba interneuron,OviDN
-720575940627110824,720575940632512156,6,hop 2 acetylcholine interneuron,OviDN
-720575940622495401,720575940620625880,9,hop 2 acetylcholine interneuron,OviDN
-720575940613511987,720575940642312136,5,hop 2 glutamate interneuron,OviDN
-720575940630606444,720575940642312136,32,hop 2 gaba interneuron,OviDN
-720575940626617914,720575940632512156,12,hop 2 glutamate interneuron,OviDN
-720575940620122503,720575940621257340,14,hop 2 acetylcholine interneuron,OviDN
-720575940620122503,720575940620625880,11,hop 2 acetylcholine interneuron,OviDN
-720575940616127931,720575940620625880,8,hop 2 acetylcholine interneuron,OviDN
-720575940620670657,720575940620625880,10,hop 2 acetylcholine interneuron,OviDN
-720575940610960021,720575940620625880,5,hop 2 acetylcholine interneuron,OviDN
-720575940632556831,720575940621257340,9,hop 2 acetylcholine interneuron,OviDN
-720575940625005239,720575940620625880,37,hop 2 gaba interneuron,OviDN
-720575940649812857,720575940621257340,8,hop 2 acetylcholine interneuron,OviDN
-720575940649812857,720575940620625880,5,hop 2 acetylcholine interneuron,OviDN
-720575940624247787,720575940621257340,10,Stanley Glu interneuron,OviDN
-720575940612708374,720575940627921182,6,hop 2 glutamate interneuron,OviDN
-720575940647473796,720575940627921182,40,hop 2 gaba interneuron,OviDN
-720575940631486765,720575940620625880,5,hop 2 glutamate interneuron,OviDN
-720575940617898456,720575940642312136,5,hop 2 gaba interneuron,OviDN
-720575940623079095,720575940642312136,13,hop 2 gaba interneuron,OviDN
-720575940632603548,720575940642312136,7,hop 2 gaba interneuron,OviDN
-720575940620038433,720575940627921182,7,hop 2 gaba interneuron,OviDN
-720575940624762300,720575940620625880,10,hop 2 glutamate interneuron,OviDN
-720575940628771587,720575940632512156,5,hop 2 glutamate interneuron,OviDN
+720575940611549902,720575940623040094,6,hop 2 gaba interneuron,hop 3 acetylcholine interneuron
+720575940635210859,720575940631309866,7,hop 2 serotonin interneuron,hop 3 serotonin interneuron
+720575940612648106,720575940621490721,6,hop 1 acetylcholine interneuron,hop 3 gaba interneuron
+720575940647606148,720575940622160705,6,hop 2 acetylcholine interneuron,hop 3 gaba interneuron
+720575940626308697,720575940610708430,84,hop 2 glutamate interneuron,hop 3 glutamate interneuron
+720575940626870846,720575940626146125,6,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940632602532,720575940614950194,8,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940630664556,720575940631915801,5,hop 1 gaba interneuron,hop 2 acetylcholine interneuron
+720575940623333964,720575940622160705,25,hop 2 gaba interneuron,hop 3 gaba interneuron
+720575940623333964,720575940625053773,19,hop 2 gaba interneuron,hop 3 serotonin interneuron
+720575940639813365,720575940610708430,6,hop 2 gaba interneuron,hop 3 glutamate interneuron
+720575940624040743,720575940620691327,12,hop 2 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940617184001,720575940633304601,12,hop 2 serotonin interneuron,hop 3 glutamate interneuron
+720575940617184001,720575940631309866,12,hop 2 serotonin interneuron,hop 3 serotonin interneuron
+720575940617184001,720575940631008824,7,hop 2 serotonin interneuron,hop 3 glutamate interneuron
+720575940630311528,720575940631309866,7,hop 2 serotonin interneuron,hop 3 serotonin interneuron
+720575940630311528,720575940633304601,6,hop 2 serotonin interneuron,hop 3 glutamate interneuron
+720575940622457579,720575940613845516,11,hop 2 acetylcholine interneuron,hop 3 gaba interneuron
+720575940622457579,720575940623777065,6,hop 2 acetylcholine interneuron,hop 3 gaba interneuron
+720575940627492866,720575940615792523,45,hop 2 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940627492866,720575940609625442,7,hop 2 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940627492866,720575940642715040,5,hop 2 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940607777628,720575940613845516,10,hop 2 acetylcholine interneuron,hop 3 gaba interneuron
+720575940607777628,720575940633304601,9,hop 2 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940629317450,720575940619025780,7,hop 1 glutamate interneuron,hop 2 gaba interneuron
+720575940629317450,720575940630311528,6,hop 1 glutamate interneuron,hop 2 serotonin interneuron
+720575940607472988,720575940624454221,9,hop 2 gaba interneuron,hop 3 acetylcholine interneuron
+720575940632873261,720575940644948771,7,hop 2 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940632873261,720575940610708430,6,hop 2 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940628683063,720575940642715040,19,hop 2 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940628683063,720575940610708430,6,hop 2 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940632146340,720575940633711028,6,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940634683743,720575940633711028,5,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940629211607,720575940630311528,5,hop 2 acetylcholine interneuron,hop 2 serotonin interneuron
+720575940614273292,720575940630311528,7,hop 2 acetylcholine interneuron,hop 2 serotonin interneuron
+720575940614273292,720575940626146125,5,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940621736669,720575940626021052,5,hop 2 glutamate interneuron,hop 3 serotonin interneuron
+720575940636574388,720575940610708430,6,hop 2 octopamine interneuron,hop 3 glutamate interneuron
+720575940637580102,720575940633711028,6,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940632636959,720575940631309866,6,hop 2 glutamate interneuron,hop 3 serotonin interneuron
+720575940633165980,720575940630349905,5,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940618788944,720575940626146125,7,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940618788944,720575940630311528,5,hop 2 acetylcholine interneuron,hop 2 serotonin interneuron
+720575940618788944,720575940627492866,5,hop 2 acetylcholine interneuron,hop 2 acetylcholine interneuron
+720575940635816926,720575940633711028,5,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940620181825,720575940622160705,9,hop 2 gaba interneuron,hop 3 gaba interneuron
+720575940629370844,720575940626021052,6,hop 2 acetylcholine interneuron,hop 3 serotonin interneuron
+720575940629370844,720575940637718598,5,hop 2 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940655013281,720575940618310229,5,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940614349974,720575940618310229,8,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940620170887,720575940622834411,5,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940626953561,720575940624454221,5,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940620746478,720575940618310229,5,hop 2 gaba interneuron,hop 3 acetylcholine interneuron
+720575940625741287,720575940615871967,26,hop 2 gaba interneuron,hop 3 serotonin interneuron
+720575940625741287,720575940632412828,11,hop 2 gaba interneuron,hop 3 acetylcholine interneuron
+720575940625741287,720575940625053773,7,hop 2 gaba interneuron,hop 3 serotonin interneuron
+720575940628360506,720575940625053773,11,hop 2 gaba interneuron,hop 3 serotonin interneuron
+720575940628360506,720575940638302909,9,hop 2 gaba interneuron,hop 3 acetylcholine interneuron
+720575940628360506,720575940615871967,8,hop 2 gaba interneuron,hop 3 serotonin interneuron
+720575940617755220,720575940631309866,77,hop 2 acetylcholine interneuron,hop 3 serotonin interneuron
+720575940620096171,720575940621490721,8,hop 2 dopamine interneuron,hop 3 gaba interneuron
+720575940620096171,720575940631309866,5,hop 2 dopamine interneuron,hop 3 serotonin interneuron
+720575940624532408,720575940621490721,12,hop 2 dopamine interneuron,hop 3 gaba interneuron
+720575940627559623,720575940625053773,19,hop 2 acetylcholine interneuron,hop 3 serotonin interneuron
+720575940627559623,720575940622160705,16,hop 2 acetylcholine interneuron,hop 3 gaba interneuron
+720575940625102692,720575940630311528,10,hop 1 acetylcholine interneuron,hop 2 serotonin interneuron
+720575940625102692,720575940627492866,8,hop 1 acetylcholine interneuron,hop 2 acetylcholine interneuron
+720575940625102692,720575940622587018,7,hop 1 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940627454569,720575940626021052,5,hop 2 acetylcholine interneuron,hop 3 serotonin interneuron
+720575940629543409,720575940610708430,5,hop 2 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940641536987,720575940634721761,5,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940645039383,720575940623040094,5,hop 2 gaba interneuron,hop 3 acetylcholine interneuron
+720575940623338281,720575940631309866,7,hop 2 gaba interneuron,hop 3 serotonin interneuron
+720575940632407826,720575940610708430,26,hop 2 gaba interneuron,hop 3 glutamate interneuron
+720575940632524559,720575940610708430,16,hop 2 gaba interneuron,hop 3 glutamate interneuron
+720575940620735258,720575940627492866,5,hop 2 acetylcholine interneuron,hop 2 acetylcholine interneuron
+720575940658442625,720575940626021052,5,hop 2 acetylcholine interneuron,hop 3 serotonin interneuron
+720575940608713993,720575940627492866,5,hop 2 acetylcholine interneuron,hop 2 acetylcholine interneuron
+720575940622661095,720575940624454221,6,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940626015242,720575940624454221,17,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940626015242,720575940626146125,11,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940626015242,720575940630311528,6,hop 2 acetylcholine interneuron,hop 2 serotonin interneuron
+720575940613426343,720575940627492866,9,hop 2 acetylcholine interneuron,hop 2 acetylcholine interneuron
+720575940632078873,720575940623777065,9,hop 2 acetylcholine interneuron,hop 3 gaba interneuron
+720575940615245107,720575940627492866,6,hop 2 acetylcholine interneuron,hop 2 acetylcholine interneuron
+720575940621827419,720575940622834411,6,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940641776032,720575940630311528,6,hop 2 acetylcholine interneuron,hop 2 serotonin interneuron
+720575940631299602,720575940610708430,22,hop 2 glutamate interneuron,hop 3 glutamate interneuron
+720575940630661164,720575940614950194,9,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940630661164,720575940624608442,6,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940608368818,720575940623777065,5,hop 2 dopamine interneuron,hop 3 gaba interneuron
+720575940630504466,720575940622160705,6,hop 2 glutamate interneuron,hop 3 gaba interneuron
+720575940628386295,720575940610708430,101,hop 2 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940617799253,720575940627492866,5,hop 2 acetylcholine interneuron,hop 2 acetylcholine interneuron
+720575940626809109,720575940614950194,8,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940626809109,720575940626021052,5,hop 2 acetylcholine interneuron,hop 3 serotonin interneuron
+720575940626809109,720575940630349905,5,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940616072221,720575940619025780,7,hop 2 acetylcholine interneuron,hop 2 gaba interneuron
+720575940616072221,720575940638517181,6,hop 2 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940616072221,720575940628903895,6,hop 2 acetylcholine interneuron,hop 3 gaba interneuron
+720575940634659508,720575940621490721,5,hop 2 glutamate interneuron,hop 3 gaba interneuron
+720575940631915801,720575940623777065,10,hop 2 acetylcholine interneuron,hop 3 gaba interneuron
+720575940610623658,720575940623777065,12,hop 2 acetylcholine interneuron,hop 3 gaba interneuron
+720575940611077188,720575940622160705,5,hop 2 acetylcholine interneuron,hop 3 gaba interneuron
+720575940626091722,720575940634721761,11,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940626091722,720575940637572324,7,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940611871352,720575940634721761,11,hop 2 glutamate interneuron,hop 3 acetylcholine interneuron
+720575940620519083,720575940629026668,13,hop 2 acetylcholine interneuron,hop 3 gaba interneuron
+720575940620519083,720575940626518474,12,hop 2 acetylcholine interneuron,hop 3 gaba interneuron
+720575940620519083,720575940624795962,11,hop 2 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940620519083,720575940619025780,10,hop 2 acetylcholine interneuron,hop 2 gaba interneuron
+720575940620519083,720575940615686841,9,hop 2 acetylcholine interneuron,hop 3 gaba interneuron
+720575940620519083,720575940631969325,7,hop 2 acetylcholine interneuron,hop 3 gaba interneuron
+720575940620519083,720575940628903895,7,hop 2 acetylcholine interneuron,hop 3 gaba interneuron
+720575940620519083,720575940613845516,6,hop 2 acetylcholine interneuron,hop 3 gaba interneuron
+720575940630883343,720575940613845516,7,hop 2 glutamate interneuron,hop 3 gaba interneuron
+720575940630883343,720575940615686841,7,hop 2 glutamate interneuron,hop 3 gaba interneuron
+720575940621225893,720575940631969325,19,hop 2 glutamate interneuron,hop 3 gaba interneuron
+720575940621225893,720575940623741795,16,hop 2 glutamate interneuron,hop 3 gaba interneuron
+720575940621225893,720575940608174894,15,hop 2 glutamate interneuron,hop 3 gaba interneuron
+720575940621225893,720575940619025780,12,hop 2 glutamate interneuron,hop 2 gaba interneuron
+720575940621225893,720575940625320530,11,hop 2 glutamate interneuron,hop 3 gaba interneuron
+720575940621225893,720575940624795962,10,hop 2 glutamate interneuron,hop 3 glutamate interneuron
+720575940621225893,720575940625053773,10,hop 2 glutamate interneuron,hop 3 serotonin interneuron
+720575940621225893,720575940628903895,8,hop 2 glutamate interneuron,hop 3 gaba interneuron
+720575940621225893,720575940637763150,8,hop 2 glutamate interneuron,hop 3 glutamate interneuron
+720575940621225893,720575940615686841,7,hop 2 glutamate interneuron,hop 3 gaba interneuron
+720575940621225893,720575940629026668,6,hop 2 glutamate interneuron,hop 3 gaba interneuron
+720575940620061793,720575940631309866,120,hop 2 acetylcholine interneuron,hop 3 serotonin interneuron
+720575940622466027,720575940623777065,9,hop 2 acetylcholine interneuron,hop 3 gaba interneuron
+720575940614109586,720575940610708430,7,hop 2 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940614109586,720575940625053773,7,hop 2 acetylcholine interneuron,hop 3 serotonin interneuron
+720575940613754833,720575940615871967,11,hop 2 acetylcholine interneuron,hop 3 serotonin interneuron
+720575940627667530,720575940610708430,36,hop 2 serotonin interneuron,hop 3 glutamate interneuron
+720575940625376442,720575940610708430,29,hop 2 serotonin interneuron,hop 3 glutamate interneuron
+720575940625376442,720575940625053773,7,hop 2 serotonin interneuron,hop 3 serotonin interneuron
+720575940625376442,720575940631309866,6,hop 2 serotonin interneuron,hop 3 serotonin interneuron
+720575940624528740,720575940633711028,7,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940626449158,720575940610708430,22,hop 2 glutamate interneuron,hop 3 glutamate interneuron
+720575940651601910,720575940610708430,35,hop 2 glutamate interneuron,hop 3 glutamate interneuron
+720575940614916725,720575940628866242,13,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940614916725,720575940624608442,11,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940609592270,720575940610708430,64,hop 2 glutamate interneuron,hop 3 glutamate interneuron
+720575940609592270,720575940625320530,7,hop 2 glutamate interneuron,hop 3 gaba interneuron
+720575940609592270,720575940623777065,5,hop 2 glutamate interneuron,hop 3 gaba interneuron
+720575940635322524,720575940608815314,12,hop 2 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940635322524,720575940621602743,6,hop 2 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940619025780,720575940624535554,16,hop 2 gaba interneuron,hop 3 acetylcholine interneuron
+720575940619025780,720575940622536179,10,hop 2 gaba interneuron,hop 3 acetylcholine interneuron
+720575940619025780,720575940618413295,9,hop 2 gaba interneuron,hop 3 acetylcholine interneuron
+720575940619025780,720575940617779029,8,hop 2 gaba interneuron,hop 3 acetylcholine interneuron
+720575940619025780,720575940613871046,8,hop 2 gaba interneuron,hop 3 acetylcholine interneuron
+720575940619025780,720575940604332460,6,hop 2 gaba interneuron,hop 3 acetylcholine interneuron
+720575940618791515,720575940610708430,31,hop 2 glutamate interneuron,hop 3 glutamate interneuron
+720575940613133718,720575940606720265,16,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940613133718,720575940628038187,8,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940613133718,720575940626021052,7,hop 2 acetylcholine interneuron,hop 3 serotonin interneuron
+720575940629954872,720575940610708430,5,hop 2 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940619866059,720575940623777065,36,hop 2 glutamate interneuron,hop 3 gaba interneuron
+720575940623139111,720575940619093163,5,hop 2 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940637072350,720575940618595046,5,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940621129607,720575940607000450,5,hop 2 gaba interneuron,hop 3 dopamine interneuron
+720575940624344072,720575940634923700,10,hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron
+720575940611456661,720575940631969325,15,hop 2 acetylcholine interneuron,hop 3 gaba interneuron
+720575940611456661,720575940624795962,15,hop 2 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940611456661,720575940626518474,13,hop 2 acetylcholine interneuron,hop 3 gaba interneuron
+720575940611456661,720575940625766531,12,hop 2 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940611456661,720575940619025780,11,hop 2 acetylcholine interneuron,hop 2 gaba interneuron
+720575940611456661,720575940636927374,11,hop 2 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940611456661,720575940637718598,11,hop 2 acetylcholine interneuron,hop 3 glutamate interneuron
+720575940611456661,720575940615686841,9,hop 2 acetylcholine interneuron,hop 3 gaba interneuron
+720575940611456661,720575940622160705,6,hop 2 acetylcholine interneuron,hop 3 gaba interneuron
+720575940611456661,720575940629026668,5,hop 2 acetylcholine interneuron,hop 3 gaba interneuron
