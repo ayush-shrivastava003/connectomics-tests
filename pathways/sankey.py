@@ -31,7 +31,17 @@ combined_df = pd.concat(dfs, ignore_index=True)
 
 # Aggregate synapse counts across all data
 aggregated = combined_df.groupby(['from_group', 'to_group'])['weight'].sum().reset_index()
-aggregated.to_csv('comb.csv')
+aggregated = aggregated[(aggregated['weight'] >= 40)]
+from_groups = set(aggregated['from_group'])
+to_groups = set(aggregated['to_group'])
+
+aggregated = aggregated[
+    ((aggregated['from_group'] == 'Sugar GRNs') | (aggregated['from_group'].isin(to_groups))) &
+    ((aggregated['to_group'] == 'IPCs') | (aggregated['to_group'].isin(from_groups)))
+]
+
+aggregated = aggregated.sort_values(by='weight', ascending=False)
+aggregated.to_csv('comb.csv', index=False)
 
 # Build global labels
 name_to_idx = {}
