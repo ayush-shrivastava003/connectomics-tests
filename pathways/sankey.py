@@ -3,7 +3,7 @@ import pandas as pd
 
 # Read and concatenate all hop files
 dfs = []
-for i in range(1, 5):
+for i in range(1, 4):
     df = pd.read_csv(f'out/hop_{i}.csv')
     dfs.append(df)
 
@@ -31,16 +31,16 @@ combined_df = pd.concat(dfs, ignore_index=True)
 
 # Aggregate synapse counts across all data
 aggregated = combined_df.groupby(['from_group', 'to_group'])['weight'].sum().reset_index()
-aggregated = aggregated[(aggregated['weight'] >= 40)]
-from_groups = set(aggregated['from_group'])
-to_groups = set(aggregated['to_group'])
+# aggregated = aggregated[(aggregated['weight'] >= 40)]
+# from_groups = set(aggregated['from_group'])
+# to_groups = set(aggregated['to_group'])
 
-aggregated = aggregated[
-    ((aggregated['from_group'] == 'Sugar GRNs') | (aggregated['from_group'].isin(to_groups))) &
-    ((aggregated['to_group'] == 'IPCs') | (aggregated['to_group'].isin(from_groups)))
-]
+# aggregated = aggregated[
+#     ((aggregated['from_group'] == 'Sugar GRNs') | (aggregated['from_group'].isin(to_groups))) &
+#     ((aggregated['to_group'] == 'IPCs') | (aggregated['to_group'].isin(from_groups)))
+# ]
 
-aggregated = aggregated.sort_values(by='weight', ascending=False)
+# aggregated = aggregated.sort_values(by='weight', ascending=False)
 aggregated.to_csv('comb.csv', index=False)
 
 # Build global labels
@@ -91,10 +91,11 @@ name_to_color = { # Key by group name for easier identification
     "hop 1 serotonin interneuron": {"line": "yellow", "arrow": "rgba(255, 192, 203, 0.5)"},
     "hop 2 serotonin interneuron": {"line": "red", "arrow": "rgba(255, 192, 203, 0.5)"},
     "hop 3 serotonin interneuron": {"line": "green", "arrow": "rgba(255, 192, 203, 0.5)"},
-    "hop 2 octopamine interneuron": {"line": "red", "arrow": "rgba(173, 255, 47, 0.5)"},
+    "hop 1 octopamine interneuron": {"line": "yellow", "arrow": "rgba(173, 255, 47, 0.5)"},
     "OviDN": {"line": "blue", "arrow": "rgba(0, 255, 0, 0.5)"},
     "Sugar GRNs": {"line": "purple", "arrow": "rgba(0, 255, 0, 0.5)"}, # Note: 720575940623172843 is actually GLU, but all the rest are ACH
-    "IPCs": {"line": "blue", "arrow": "rgba(0, 255, 255, 0.5)"}, # Unknown NT type
+    "IPCs": {"line": "blue", "arrow": "rgba(0, 255, 255, 0.5)"}, # Unknown NT type,
+    "Sugar-SELs": {"line": "purple", "arrow": "rgba(255, 192, 203, 0.5)"},
 }
 
 node_colors = [name_to_color.get(label, {"line": "grey"})['line'] for label in labels]

@@ -6,11 +6,11 @@ import pandas as pd
 
 # Path definitions
 GROUPS_JSON_PATH = 'data/groups.json'
-HOP_MATRIX_PATH = 'data/merged.csv'
+HOP_MATRIX_PATH = 'data/merged_2.csv'
+TWO_PATHS_PATH = 'data/two.csv'
 THREE_PATHS_PATH = 'data/three.csv'
-FOUR_PATHS_PATH = 'data/four.csv'
+TWO_PAIR_PATH = 'data/two_pairs.csv'
 THREE_PAIR_PATH = 'data/three_pairs.csv'
-FOUR_PAIR_PATH = 'data/four_pairs.csv'
 
 with open(GROUPS_JSON_PATH, 'r') as f:
     groups = load(f)
@@ -23,31 +23,31 @@ for group_name, neuron_ids in groups.items():
 
 def load_hop_matrix():
     merged = pd.read_csv(HOP_MATRIX_PATH)
-    merged = merged.rename(columns={merged.columns[0]: 'Sugar GRN'})
-    melted = merged.melt(id_vars=['Sugar GRN'], var_name='IPC', value_name='hops')
-    melted['Sugar GRN'] = melted['Sugar GRN'].astype(int)
+    merged = merged.rename(columns={merged.columns[0]: 'Sugar-SEL'})
+    melted = merged.melt(id_vars=['Sugar-SEL'], var_name='IPC', value_name='hops')
+    melted['Sugar-SEL'] = melted['Sugar-SEL'].astype(int)
     melted['IPC'] = melted['IPC'].astype(int)
-    melted = melted[melted['hops'].isin([3, 4])]
+    melted = melted[melted['hops'].isin([2, 3])]
     return melted
 
 
 def get_shortest_path_pairs():
     distances = load_hop_matrix()
+    two = distances[distances['hops'] == 2].copy()
     three = distances[distances['hops'] == 3].copy()
-    four = distances[distances['hops'] == 4].copy()
+    two.to_csv(TWO_PAIR_PATH, index=False)
     three.to_csv(THREE_PAIR_PATH, index=False)
-    four.to_csv(FOUR_PAIR_PATH, index=False)
-    return three, four
+    return two, three
 
 
 def get_pathways():
     from fafbseg import flywire
 
     distances = load_hop_matrix()
-    grn_ids = distances['Sugar GRN'].unique().tolist()
+    grn_ids = distances['Sugar-SEL'].unique().tolist()
     ipc_ids = distances['IPC'].unique().tolist()
 
-    print('Getting GRN -> I1')
+    print('Getting Sugar-SEL -> I1')
     grn_i1 = flywire.synapses.get_connectivity(
         grn_ids,
         upstream=False,
@@ -58,7 +58,7 @@ def get_pathways():
     grn_i1['pre_group'] = grn_i1['pre'].map(neuron_to_group)
     grn_i1['post_group'] = grn_i1['post'].map(neuron_to_group)
     grn_i1 = grn_i1[(grn_i1['weight'] >= 5) & (grn_i1['pre_group'] != grn_i1['post_group'])]
-    print('Done GRN -> I1')
+    print('Done Sugar-SEL -> I1')
 
     print('Getting I1 -> I2')
     i1_i2 = flywire.synapses.get_connectivity(
@@ -78,24 +78,42 @@ def get_pathways():
     ).query('weight >= 5')
     print('Done IPC upstream partners')
 
-    print('Getting second upstream hop for IPC partners')
-    i2_i3 = flywire.synapses.get_connectivity(
-        ipc_up['pre'].tolist(),
-        downstream=False,
-        filtered=True,
-        materialization=783,
-    ).query('weight >= 5')
-    print('Done second upstream hop')
+    # print('Getting second upstream hop for IPC partners')
+    # i2_i3 = flywire.synapses.get_connectivity(
+    #     ipc_up['pre'].tolist(),
+    #     downstream=False,
+    #     filtered=True,
+    #     materialization=783,
+    # ).query('weight >= 5')
+    # print('Done second upstream hop')
 
     grn_i2 = grn_i1.merge(i1_i2, left_on='post', right_on='pre', how='inner').rename(columns={
-        'pre_x': 'Sugar GRN',
+        'pre_x': 'Sugar-SEL',
         'pre_y': 'I1',
         'post_y': 'I2',
         'weight_y': 'weight_i1_i2',
         'weight_x': 'weight_grn_i1',
     }).drop(columns=['post_x'])
 
-    three_pairs, four_pairs = get_shortest_path_pairs()
+    two_pairs, three_pairs = get_shortest_path_pairs()
+
+    print('Building 2-hop paths')
+    two = grn_i1.merge(ipc_up, left_on='post', right_on='pre', how='inner')
+    two = two.rename(columns={
+        'pre_x': 'Sugar-SEL',
+        'post_x': 'I1',
+        'post_y': 'IPC',
+        'weight_y': 'weight_i1_ipc',
+        'weight_x': 'weight_grn_i1',
+    })
+    print(two.head())
+    # two = two[['pre', 'weight_grn_i1', 'pre_group', 'post_group', 'weight_i1_ipc', 'IPC']].rename(columns={
+    #     'pre': 'Sugar-SEL',
+    #     'post_group': 'I1',
+    # })
+    two = two.merge(two_pairs[['Sugar-SEL', 'IPC']], on=['Sugar-SEL', 'IPC'], how='inner').drop_duplicates()
+    two['path_length'] = 2
+    two.to_csv(TWO_PATHS_PATH, index=False)
 
     print('Building 3-hop paths')
     three = grn_i2.merge(ipc_up, left_on='I2', right_on='pre', how='inner')
@@ -103,39 +121,25 @@ def get_pathways():
         'post': 'IPC',
         'weight': 'weight_i2_ipc',
     })
-    three = three[['Sugar GRN', 'weight_grn_i1', 'pre_group', 'post_group', 'I1', 'I2', 'weight_i1_i2', 'weight_i2_ipc', 'IPC']]
-    three = three.merge(three_pairs[['Sugar GRN', 'IPC']], on=['Sugar GRN', 'IPC'], how='inner').drop_duplicates()
+    three = three[['Sugar-SEL', 'weight_grn_i1', 'pre_group', 'post_group', 'I1', 'I2', 'weight_i1_i2', 'weight_i2_ipc', 'IPC']]
+    three = three.merge(three_pairs[['Sugar-SEL', 'IPC']], on=['Sugar-SEL', 'IPC'], how='inner').drop_duplicates()
     three['path_length'] = 3
     three.to_csv(THREE_PATHS_PATH, index=False)
 
-    print('Building 4-hop paths')
-    i2_ipc = i2_i3.merge(ipc_up, left_on='post', right_on='pre', how='inner').rename(columns={
-        'pre_x': 'I2',
-        'pre_y': 'I3',
-        'post_y': 'IPC',
-        'weight_y': 'weight_i3_ipc',
-        'weight_x': 'weight_i2_i3',
-    }).drop(columns=['post_x'])
-
-    four = grn_i2.merge(i2_ipc, left_on='I2', right_on='I2', how='inner').drop_duplicates()
-    four = four.merge(four_pairs[['Sugar GRN', 'IPC']], on=['Sugar GRN', 'IPC'], how='inner')
-    four['path_length'] = 4
-    four.to_csv(FOUR_PATHS_PATH, index=False)
-
+    print(f'Saved {len(two)} two-hop paths to {TWO_PATHS_PATH}')
     print(f'Saved {len(three)} three-hop paths to {THREE_PATHS_PATH}')
-    print(f'Saved {len(four)} four-hop paths to {FOUR_PATHS_PATH}')
 
 
 def organize_hops():
-    four = pd.read_csv(FOUR_PATHS_PATH)
+    two = pd.read_csv(TWO_PATHS_PATH)
     three = pd.read_csv(THREE_PATHS_PATH)
 
     first_hop = pd.concat([
-        four[['Sugar GRN', 'I1', 'weight_grn_i1', 'pre_group', 'post_group']],
-        three[['Sugar GRN', 'I1', 'weight_grn_i1', 'pre_group', 'post_group']]
+        two[['Sugar-SEL', 'I1', 'weight_grn_i1', 'pre_group', 'post_group']],
+        three[['Sugar-SEL', 'I1', 'weight_grn_i1', 'pre_group', 'post_group']]
         ]).drop_duplicates()
     first_hop = first_hop.rename(columns={
-        'Sugar GRN': 'from',
+        'Sugar-SEL': 'from',
         'I1': 'to',
         'weight_grn_i1': 'weight',
         'pre_group': 'from_group',
@@ -143,10 +147,7 @@ def organize_hops():
     })
     first_hop.to_csv('out/hop_1.csv', index=False)
 
-    second_hop = pd.concat([
-        four[['I1', 'I2', 'weight_i1_i2']],
-        three[['I1', 'I2', 'weight_i1_i2']]
-    ]).drop_duplicates()
+    second_hop = three[['I1', 'I2', 'weight_i1_i2']].drop_duplicates()
     second_hop['from_group'] = second_hop['I1'].map(neuron_to_group)
     second_hop['to_group'] = second_hop['I2'].map(neuron_to_group)
     second_hop = second_hop.rename(columns={
@@ -158,10 +159,10 @@ def organize_hops():
     })
     second_hop.to_csv('out/hop_2.csv', index=False)
 
-    third_hop_4 = four[['I2', 'I3', 'weight_i2_i3']].rename(columns={
-        'I2': 'from',
-        'I3': 'to',
-        'weight_i2_i3': 'weight',
+    third_hop_2 = two[['I1', 'IPC', 'weight_i1_ipc']].rename(columns={
+        'I1': 'from',
+        'IPC': 'to',
+        'weight_i1_ipc': 'weight',
     })
 
     third_hop_3 = three[['I2', 'IPC', 'weight_i2_ipc']].rename(columns={
@@ -170,22 +171,10 @@ def organize_hops():
         'weight_i2_ipc': 'weight',
     })
 
-    third_hop = pd.concat([third_hop_4, third_hop_3], ignore_index=True).drop_duplicates()
+    third_hop = pd.concat([third_hop_2, third_hop_3], ignore_index=True).drop_duplicates()
     third_hop['from_group'] = third_hop['from'].map(neuron_to_group)
     third_hop['to_group'] = third_hop['to'].map(neuron_to_group)
     third_hop.to_csv('out/hop_3.csv', index=False)
-
-    fourth_hop = four[['I3', 'IPC', 'weight_i3_ipc']].drop_duplicates()
-    fourth_hop['from_group'] = fourth_hop['I3'].map(neuron_to_group)
-    fourth_hop['to_group'] = fourth_hop['IPC'].map(neuron_to_group)
-    fourth_hop = fourth_hop.rename(columns={
-        'I3': 'from',
-        'IPC': 'to',
-        'weight_i3_ipc': 'weight',
-        'from_group': 'from_group',
-        'to_group': 'to_group',
-    })
-    fourth_hop.to_csv('out/hop_4.csv', index=False)
 
 
 def find_unknown_neurons():
@@ -198,7 +187,7 @@ def find_unknown_neurons():
             for neuron_id in neuron_ids:
                 neuron_to_group[neuron_id] = group_name
 
-    for i in range(1, 5):
+    for i in range(1, 4):
         file = f'out/hop_{i}.csv'
         print(f'Analyzing {file}')
         df = pd.read_csv(file)
@@ -240,6 +229,7 @@ def find_unknown_neurons():
         df.to_csv(file, index=False)
 
 
-# get_pathways()
-organize_hops()
-find_unknown_neurons()
+if __name__ == '__main__':
+    get_pathways()
+    organize_hops()
+    find_unknown_neurons()
