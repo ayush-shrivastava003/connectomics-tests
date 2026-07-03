@@ -1,45 +1,33 @@
 from_group,to_group,weight
-Sugar GRNs,hop 1 acetylcholine interneuron,1865
-hop 1 gaba interneuron,hop 2 acetylcholine interneuron,1583
-hop 1 acetylcholine interneuron,hop 2 acetylcholine interneuron,1436
-hop 3 glutamate interneuron,IPCs,1399
-Sugar GRNs,hop 1 gaba interneuron,1380
-hop 3 acetylcholine interneuron,IPCs,705
-hop 1 acetylcholine interneuron,hop 2 gaba interneuron,671
-hop 1 acetylcholine interneuron,hop 2 glutamate interneuron,488
-hop 2 acetylcholine interneuron,hop 3 glutamate interneuron,472
-hop 1 glutamate interneuron,hop 2 acetylcholine interneuron,430
-hop 1 glutamate interneuron,hop 1 acetylcholine interneuron,395
-hop 1 acetylcholine interneuron,hop 1 acetylcholine interneuron,388
-hop 2 glutamate interneuron,hop 3 glutamate interneuron,353
-hop 1 acetylcholine interneuron,hop 1 gaba interneuron,307
-hop 2 acetylcholine interneuron,hop 3 serotonin interneuron,281
-hop 3 gaba interneuron,IPCs,254
-hop 2 acetylcholine interneuron,hop 3 acetylcholine interneuron,243
-hop 2 acetylcholine interneuron,IPCs,223
-hop 2 acetylcholine interneuron,hop 3 gaba interneuron,210
-hop 1 glutamate interneuron,hop 2 glutamate interneuron,193
-hop 1 gaba interneuron,hop 1 glutamate interneuron,190
-hop 2 gaba interneuron,hop 3 acetylcholine interneuron,161
-hop 1 gaba interneuron,hop 2 gaba interneuron,155
-hop 2 glutamate interneuron,hop 3 gaba interneuron,154
-hop 2 gaba interneuron,hop 3 serotonin interneuron,121
-Sugar GRNs,hop 1 dopamine interneuron,118
-hop 1 acetylcholine interneuron,hop 2 serotonin interneuron,117
-hop 2 serotonin interneuron,hop 3 glutamate interneuron,109
-hop 1 gaba interneuron,hop 1 acetylcholine interneuron,108
-hop 2 gaba interneuron,hop 3 glutamate interneuron,93
-hop 1 glutamate interneuron,hop 2 gaba interneuron,89
-hop 2 glutamate interneuron,hop 3 acetylcholine interneuron,83
-hop 1 gaba interneuron,hop 2 glutamate interneuron,82
-hop 2 acetylcholine interneuron,hop 2 gaba interneuron,77
-hop 2 gaba interneuron,hop 2 gaba interneuron,62
-hop 1 glutamate interneuron,hop 2 serotonin interneuron,62
-hop 2 acetylcholine interneuron,hop 2 serotonin interneuron,55
-hop 2 gaba interneuron,IPCs,50
-hop 1 dopamine interneuron,hop 2 acetylcholine interneuron,48
-hop 3 serotonin interneuron,IPCs,45
-hop 2 serotonin interneuron,IPCs,43
-hop 1 acetylcholine interneuron,hop 1 glutamate interneuron,43
-hop 1 gaba interneuron,hop 2 serotonin interneuron,41
-hop 2 glutamate interneuron,IPCs,40
+Sugar-SELs,hop 1 acetylcholine interneuron,248
+Sugar-SELs,hop 1 dopamine interneuron,5
+Sugar-SELs,hop 1 gaba interneuron,29
+Sugar-SELs,hop 1 glutamate interneuron,46
+Sugar-SELs,hop 1 octopamine interneuron,5
+Sugar-SELs,hop 1 serotonin interneuron,13
+hop 1 acetylcholine interneuron,IPCs,513
+hop 1 acetylcholine interneuron,hop 2 acetylcholine interneuron,59
+hop 1 acetylcholine interneuron,hop 2 gaba interneuron,269
+hop 1 acetylcholine interneuron,hop 2 glutamate interneuron,34
+hop 1 acetylcholine interneuron,hop 2 serotonin interneuron,111
+hop 1 dopamine interneuron,hop 2 gaba interneuron,9
+hop 1 dopamine interneuron,hop 2 serotonin interneuron,7
+hop 1 gaba interneuron,hop 2 acetylcholine interneuron,31
+hop 1 gaba interneuron,hop 2 dopamine interneuron,11
+hop 1 gaba interneuron,hop 2 gaba interneuron,105
+hop 1 gaba interneuron,hop 2 glutamate interneuron,21
+hop 1 gaba interneuron,hop 2 serotonin interneuron,30
+hop 1 glutamate interneuron,IPCs,17
+hop 1 glutamate interneuron,hop 2 acetylcholine interneuron,12
+hop 1 glutamate interneuron,hop 2 gaba interneuron,12
+hop 1 glutamate interneuron,hop 2 glutamate interneuron,10
+hop 1 glutamate interneuron,hop 2 serotonin interneuron,45
+hop 1 octopamine interneuron,hop 2 gaba interneuron,8
+hop 1 octopamine interneuron,hop 2 glutamate interneuron,12
+hop 1 serotonin interneuron,hop 2 gaba interneuron,11
+hop 1 serotonin interneuron,hop 2 serotonin interneuron,5
+hop 2 acetylcholine interneuron,IPCs,143
+hop 2 dopamine interneuron,IPCs,10
+hop 2 gaba interneuron,IPCs,25
+hop 2 glutamate interneuron,IPCs,808
+hop 2 serotonin interneuron,IPCs,59

@@ -1,0 +1,27 @@
+pre_group,post_group,syn_count
+Earmuff,Other,166
+Earmuff,OviDN,102
+Earmuff,Stanley ACh interneuron,10
+GNG.SLP.T1 (L),Other,50
+GNG.SLP.T1 (L),Stanley ACh interneuron,84
+GNG.SLP.T1 (L),Stanley Glu interneuron,19
+GNG.SLP.T1 (R),Other,49
+GNG.SLP.T1 (R),Stanley ACh interneuron,43
+GNG.SLP.T1 (R),Stanley Glu interneuron,8
+GNG.SLP.T2 (L),Stanley Glu interneuron,34
+GNG.SLP.T2 (R),Other,5
+GNG.SLP.T2 (R),Stanley Glu interneuron,34
+Ir94e,Earmuff,21
+Ir94e,GNG.SLP.T1 (L),251
+Ir94e,GNG.SLP.T1 (R),287
+Ir94e,GNG.SLP.T2 (L),19
+Ir94e,GNG.SLP.T2 (R),36
+Ir94e,Ir94e,326
+Ir94e,Other,2411
+Other,Earmuff,48
+Other,Other,1088
+Other,OviDN,738
+Other,Stanley ACh interneuron,10
+Other,Stanley Glu interneuron,132
+Stanley ACh interneuron,OviDN,142
+Stanley Glu interneuron,OviDN,34
