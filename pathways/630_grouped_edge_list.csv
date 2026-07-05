@@ -1,23 +1,30 @@
 pre_group,post_group,weight
-GNG.SLP.T1 (R),Other,991
-GNG.SLP.T1 (R),Stanley ACh interneuron,12
+GNG.SLP.T1 (L),Other,816
+GNG.SLP.T1 (L),Stanley ACh interneuron,78
+GNG.SLP.T1 (L),Stanley Glu interneuron,13
+GNG.SLP.T1 (R),Other,962
+GNG.SLP.T1 (R),Stanley ACh interneuron,33
+GNG.SLP.T1 (R),Stanley Glu interneuron,8
 GNG.SLP.T2 (L),Other,418
 GNG.SLP.T2 (L),Stanley Glu interneuron,37
 GNG.SLP.T2 (R),Other,532
 GNG.SLP.T2 (R),Stanley Glu interneuron,25
+Ir94e,GNG.SLP.T1 (L),173
 Ir94e,GNG.SLP.T1 (R),178
 Ir94e,GNG.SLP.T2 (L),17
 Ir94e,GNG.SLP.T2 (R),22
 Ir94e,Ir94e,426
-Ir94e,Other,3523
-Other,GNG.SLP.T1 (R),365
+Ir94e,Other,3350
+Other,GNG.SLP.T1 (L),402
+Other,GNG.SLP.T1 (R),360
 Other,GNG.SLP.T2 (L),712
 Other,GNG.SLP.T2 (R),735
 Other,Ir94e,1681
-Other,Other,77471
-Other,OviDN,962
-Other,Stanley ACh interneuron,31
-OviDN,Other,468
-Stanley ACh interneuron,Other,33
-Stanley ACh interneuron,OviDN,21
-Stanley Glu interneuron,OviDN,10
+Other,Other,74943
+Other,OviDN,1872
+Other,Stanley ACh interneuron,13
+OviDN,Other,908
+Stanley ACh interneuron,GNG.SLP.T1 (L),16
+Stanley ACh interneuron,GNG.SLP.T1 (R),5
+Stanley ACh interneuron,OviDN,110
+Stanley Glu interneuron,OviDN,31
