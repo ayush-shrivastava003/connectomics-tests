@@ -16,3 +16,5 @@ Ir94e GRNs were shown to activate strongly in response to amino acids, and in tu
     python3 -m pip install pandas networkx fafbseg plotly
     ```
 4. Run all cells in [`new.ipynb`](https://github.com/ayush-shrivastava003/connectomics-tests/blob/main/pathways/new.ipynb). You'll also see a step-by-step breakdown of my approach in the notebook.
+
+All relevant files are contained in the directory [`pathways/`](https://github.com/ayush-shrivastava003/connectomics-tests/tree/main/pathways). For this approach, the only relevant code is in `new.ipynb`.
