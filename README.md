@@ -8,7 +8,10 @@ Ir94e GRNs were shown to activate strongly in response to amino acids, and in tu
 
 ## To replicate results
 
-1. Downlaod connectivity data from [FlyWire v783](https://codex.flywire.ai/api/download). The file name should be `connections_princeton.csv`.
+1. Downlaod the following datasets from [FlyWire v783](https://codex.flywire.ai/api/download).
+   1. `connections_princeton.csv` - connectivity and synapse counts
+   2. `neurons.csv` - neurotransmitter types and scores
+   3. `consolidated_cell_types.csv` - cell types
 2. Get an API token for `fafbseg` and install it. See directions [here](https://fafbseg-py.readthedocs.io/en/latest/source/tutorials/flywire_setup.html#flywire-setup).
 3. Install dependencies:
    
