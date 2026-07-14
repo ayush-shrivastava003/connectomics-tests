@@ -1,6 +1,8 @@
-pathways/token.txt
-pathways/fafb_783_edge_list.csv
-pathways/connections_princeton.csv
-pathways/630_edge_list.csv
-pathways/consolidated_cell_types.csv
-pathways/neurons.csv
+fafb/token.txt
+fafb/fafb_783_edge_list.csv
+fafb/connections_princeton.csv
+fafb/630_edge_list.csv
+fafb/consolidated_cell_types.csv
+fafb/neurons.csv
+banc/neurons.csv
+banc/connections_princeton.csv
