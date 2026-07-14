@@ -1,0 +1,56 @@
+pre_group,post_group,syn_count
+1° ACH interneuron,2° ACH interneuron,33
+1° ACH interneuron,2° GABA interneuron,116
+1° ACH interneuron,2° GLUT interneuron,12
+1° ACH interneuron,2° Unknown,25
+1° ACH interneuron,Earmuff,42
+1° ACH interneuron,Stanley ACh interneuron,10
+1° ACH interneuron,VP5+Z_adPN,6
+1° GABA interneuron,2° ACH interneuron,377
+1° GABA interneuron,2° GABA interneuron,108
+1° GABA interneuron,2° GLUT interneuron,88
+1° GABA interneuron,2° Unknown,17
+1° GABA interneuron,Earmuff,6
+1° GABA interneuron,Stanley Glu interneuron,5
+1° GLUT interneuron,2° ACH interneuron,30
+1° GLUT interneuron,2° GABA interneuron,118
+1° GLUT interneuron,2° Unknown,30
+1° SER interneuron,2° GABA interneuron,6
+1° Unknown,2° ACH interneuron,13
+1° Unknown,2° GABA interneuron,27
+2° ACH interneuron,OviDN,337
+2° GABA interneuron,OviDN,298
+2° GLUT interneuron,OviDN,77
+2° Unknown,OviDN,21
+CB0159,2° GABA interneuron,82
+Earmuff,2° ACH interneuron,166
+Earmuff,OviDN,102
+Earmuff,Stanley ACh interneuron,10
+GNG.SLP.T1 (L),2° ACH interneuron,31
+GNG.SLP.T1 (L),2° GLUT interneuron,19
+GNG.SLP.T1 (L),Stanley ACh interneuron,84
+GNG.SLP.T1 (L),Stanley Glu interneuron,19
+GNG.SLP.T1 (R),2° ACH interneuron,43
+GNG.SLP.T1 (R),2° GLUT interneuron,6
+GNG.SLP.T1 (R),Stanley ACh interneuron,43
+GNG.SLP.T1 (R),Stanley Glu interneuron,8
+GNG.SLP.T2 (L),Stanley Glu interneuron,34
+GNG.SLP.T2 (R),2° GABA interneuron,5
+GNG.SLP.T2 (R),Stanley Glu interneuron,34
+Ir94e,1° ACH interneuron,343
+Ir94e,1° GABA interneuron,158
+Ir94e,1° GLUT interneuron,18
+Ir94e,1° SER interneuron,6
+Ir94e,1° Unknown,68
+Ir94e,CB0159,1813
+Ir94e,Earmuff,21
+Ir94e,GNG.SLP.T1 (L),251
+Ir94e,GNG.SLP.T1 (R),287
+Ir94e,GNG.SLP.T2 (L),19
+Ir94e,GNG.SLP.T2 (R),36
+Ir94e,Ir94e,326
+Ir94e,VP5+Z_adPN,5
+Stanley ACh interneuron,OviDN,142
+Stanley Glu interneuron,OviDN,34
+VP5+Z_adPN,OviDN,5
+VP5+Z_adPN,Stanley Glu interneuron,127
