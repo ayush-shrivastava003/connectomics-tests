@@ -6,3 +6,5 @@ fafb/consolidated_cell_types.csv
 fafb/neurons.csv
 banc/neurons.csv
 banc/connections_princeton.csv
+.continue/
+cache/
