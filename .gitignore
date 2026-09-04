@@ -14,3 +14,6 @@ banc/data/alc_ferm_orns.csv
 banc/data/connections_princeton.csv
 banc/data/given_neurons.csv
 banc/data/neurons.csv
+banc/meshes_obj
+banc/test.blend
+banc/test.blend1
