@@ -55,23 +55,41 @@ GROUP_COLORS = {
     "ORN": (0.85, 0.15, 0.15, 1.0),
     "OviDN": (0.15, 0.75, 0.15, 1.0),
     "CA": (0.15, 0.25, 0.85, 1.0),
+    "DA": (0.4793, 0.1912, 0.1413, 1.0),      # Dopamine (#B87969)
+    "SER": (0.2623, 0.1221, 0.3005, 1.0),     # Serotonin (#8C6295)
+    "ACH": (0.3005, 0.3663, 0.6172, 1.0),     # Acetylcholine (#95A3CE)
+    "GABA": (0.6654, 0.3916, 0.0648, 1.0),    # GABA (#D5A848)
+    "GLUT": (0.2384, 0.3916, 0.0999, 1.0),    # Glutamate (#86A859)
+    "HIST": (0.5711, 0.2016, 0.2542, 1.0),    # Histamine (#C77C8A)
+    "TYR": (0.159, 0.3864, 0.3663, 1.0),      # Tyrosine (#6FA7A3)
+    "OCT": (0.1683, 0.107, 0.314, 1.0),       # Octopamine (#725C98)
+    "Unknown": (0.5906, 0.5906, 0.5906, 1.0) # Unknown (#CACACA)
 }
 
-# Camera angles as (name, direction_vector, up_hint_degrees) -- direction
-# is normalized and scaled by the scene's actual bounding-sphere radius at
-# render time, NOT a hardcoded distance. This is the fix for the "camera
-# pointed at empty space" bug: BANC's mesh content is NOT centered at
-# world (0,0,0) after import (CAVE/graphene coordinates are absolute, not
-# relative to any particular neuron), so cameras built around a fixed
-# (0,0,0) target and fixed absolute distances only work by coincidence.
-# Direction vectors don't need to be unit length -- get_camera_angles()
-# normalizes them.
-CAMERA_DIRECTIONS = [
-    ("dorsal", (0, 0, 1)),
-    ("lateral_L", (1, 0, 0.15)),
-    ("lateral_R", (-1, 0, 0.15)),
-    ("anterior", (0, -1, 0.15)),
-    ("oblique", (0.7, -0.7, 0.5)),
+# Camera views expressed as ANATOMICAL labels, not raw world-axis vectors.
+# The earlier version hardcoded world (0,0,1) = dorsal, which assumed the
+# CNS's dorsal-ventral axis lines up with Blender's world Z -- it doesn't
+# (confirmed empirically: bounding box extents were X=88.7, Y=31.6,
+# Z=109.6, and a CNS's longest axis is anterior-posterior, shortest is
+# dorsal-ventral -- so world Z is actually A-P here, world Y is D-V, world
+# X is left-right). Rather than hardcode that one-off mapping (fragile if
+# a different circuit's outline mesh or a coordinate-convention change
+# shifts things), axis roles are inferred from bounding-box shape at
+# render time: longest extent = anterior-posterior, shortest = dorsal-
+# ventral, middle = medial-lateral. This holds for any CNS-shaped volume
+# regardless of which world axis it happens to occupy.
+#
+# Each entry: (name, axis_role, sign, up_role). sign=+1/-1 picks which end
+# of that axis the camera sits on; up_role names which anatomical axis
+# should map to the camera's "up" so the roll comes out right (this is
+# the fix for the earlier upside-down dorsal render, which used a fixed
+# world-Y up-hint that fought the real anatomy).
+CAMERA_VIEWS = [
+    ("dorsal", "dorsal_ventral", -1, "anterior_posterior", "medial_lateral", "anterior_posterior"),
+    ("anterior", "anterior_posterior", -1, "dorsal_ventral", "medial_lateral", "dorsal_ventral"),
+    ("lateral_L", "medial_lateral", +1, "dorsal_ventral", "anterior_posterior", "dorsal_ventral"),
+    ("lateral_R", "medial_lateral", -1, "dorsal_ventral", "anterior_posterior", "dorsal_ventral"),
+    ("oblique", None, None, "dorsal_ventral", None, None),  # handled specially, see render_all_angles
 ]
 
 MESH_SCALE = 1 / 10000  # matches the scaling convention in 3d_skeleton.py / b3d.Handler(scaling=...)
@@ -87,9 +105,9 @@ def clear_scene():
 
 
 def load_manifest(mesh_dir):
-    """Returns mesh_id_ (str, no extension) -> group.
+    """Returns mesh_id (str, no extension) -> group.
 
-    Mesh mesh_ids are NOT root IDs (navis.write_mesh names them by some
+    Mesh IDs are NOT root IDs (navis.write_mesh names them by some
     internal/UUID-like scheme, not the root_id you passed in), so the
     manifest must carry both the mesh_id and the root_id, and this
     lookup has to key on mesh_id since that's the only thing
@@ -103,7 +121,7 @@ def load_manifest(mesh_dir):
             raise ValueError(
                 f"manifest.csv has columns {reader.fieldnames}, expected a "
                 "'mesh_id' column -- update Stage A to write the mesh "
-                "mesh_id (path.stem) alongside root_id and group."
+                "ID (path.stem) alongside root_id and group."
             )
         for row in reader:
             mapping[row["mesh_id"]] = row["group"]
@@ -267,12 +285,13 @@ def setup_render(engine, device, resolution, samples, compute_type=None):
 
 
 def compute_scene_bounds(objects):
-    """World-space bounding box center + radius across all given mesh
-    objects. This is the actual fix for the framing bug: CAVE/graphene
-    root IDs carry absolute connectome coordinates, so imported geometry
-    is NOT centered at (0,0,0) -- it sits wherever that ID's absolute
-    position was, offset by nothing. Cameras need to target and frame
-    around this computed center, not the world origin.
+    """World-space bounding box center + per-axis extents across the
+    given mesh objects. Called with ONLY the CNS outline object (not the
+    neuron meshes) -- the outline is a strict spatial superset of every
+    neuron in any circuit subset, so it's a stable, circuit-independent
+    reference frame. Framing off the neuron subset instead would make
+    different circuit renders inconsistently scaled/centered against
+    one another.
     """
     min_co = Vector((float("inf"),) * 3)
     max_co = Vector((float("-inf"),) * 3)
@@ -293,51 +312,117 @@ def compute_scene_bounds(objects):
             max_co.z = max(max_co.z, world_co.z)
 
     center = (min_co + max_co) / 2
-    radius = (max_co - min_co).length / 2
+    extents = max_co - min_co  # full extent per axis, not half
+    radius = extents.length / 2
     print(f"Scene bounds: center={tuple(round(c, 3) for c in center)}, "
-          f"radius={radius:.3f}")
-    return center, radius
+          f"extents={tuple(round(e, 3) for e in extents)}, radius={radius:.3f}")
+    return center, extents, radius
 
 
-def frame_camera_on_target(cam_obj, target, location):
+def infer_axis_roles(extents):
+    """Map world axes (0=X, 1=Y, 2=Z) to anatomical roles by extent size:
+    longest = anterior_posterior, shortest = dorsal_ventral, middle =
+    medial_lateral. This holds for any CNS-shaped bounding volume
+    regardless of which world axis it happens to land on for a given
+    mesh export/coordinate convention -- confirmed against the actual
+    printed extents (X=88.68, Y=31.55, Z=109.56): Z is longest (A-P),
+    Y is shortest (D-V), X is middle (M-L), matching known fly CNS
+    proportions (elongated A-P, thin D-V).
+    Returns {role_name: (axis_index, extent_value)}.
+    """
+    axis_extents = sorted(enumerate(extents), key=lambda t: t[1], reverse=True)
+    roles = {
+        "anterior_posterior": axis_extents[0],
+        "medial_lateral": axis_extents[1],
+        "dorsal_ventral": axis_extents[2],
+    }
+    print("Inferred axis roles (role -> (axis_index, extent)):", roles)
+    return roles
+
+
+def unit_vector_for_axis(axis_index, sign):
+    v = [0.0, 0.0, 0.0]
+    v[axis_index] = float(sign)
+    return Vector(v)
+
+
+def frame_camera_on_target(cam_obj, target, location, up_hint="Y"):
     direction = target - location
     cam_obj.location = location
-    cam_obj.rotation_euler = direction.to_track_quat("-Z", "Y").to_euler()
+    cam_obj.rotation_euler = direction.to_track_quat("-Z", up_hint).to_euler()
+
+def distance_for_fov(cam_data, horizontal_extent, vertical_extent, margin=1.15):
+    """Required camera distance so both extents fit in frame, with margin."""
+    fov_h = cam_data.angle_x   # radians, live from lens+sensor_width
+    fov_v = cam_data.angle_y   # radians, live from lens+sensor_height
+    d_for_width = horizontal_extent / (2 * math.tan(fov_h / 2))
+    d_for_height = vertical_extent / (2 * math.tan(fov_v / 2))
+    return max(d_for_width, d_for_height) * margin
 
 
 def render_all_angles(out_dir, resolution):
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    mesh_objects = [o for o in bpy.context.scene.objects if o.type == "MESH"]
-    if not mesh_objects:
-        raise RuntimeError("No mesh objects in scene -- did import_meshes run first?")
-    center, radius = compute_scene_bounds(mesh_objects)
+    outline_obj = bpy.data.objects.get("cns_outline")
+    if outline_obj is None:
+        raise RuntimeError(
+            "No 'cns_outline' object found -- framing needs the outline mesh "
+            "as the stable reference volume (see compute_scene_bounds docstring). "
+            "Check that cns_outline.obj exists in mesh-dir and import_meshes loaded it."
+        )
+    center, extents, radius = compute_scene_bounds([outline_obj])
     if radius == 0:
         raise RuntimeError("Computed scene radius is 0 -- bounding box degenerate, "
-                            "check that meshes actually imported with real geometry.")
+                            "check that the outline mesh actually has real geometry.")
+    axis_roles = infer_axis_roles(extents)
 
-    # Distance scaled to bounding radius rather than a fixed number, with
-    # a margin so the full extent fits in frame (empirical factor -- 2.2x
-    # radius comfortably fits a roughly spherical/ellipsoid cluster with a
-    # ~50mm lens; tighten/loosen after seeing a real render).
-    distance = radius * 2.2
+    # # Distance scaled to bounding radius, with margin so the fullest
+    # # extent (anterior-posterior, always the longest) still fits in frame.
+    # # 1.3x the A-P half-extent is tighter than the earlier flat 2.2x*radius
+    # # guess, and won't clip since it's derived from the real long axis
+    # # rather than a generic sphere-fit distance.
+    # ap_axis, ap_extent = axis_roles["anterior_posterior"]
+    # distance = max(radius * 2.2, ap_extent * 0.75)
 
     bpy.ops.object.camera_add(location=(0, 0, 0))
     cam_obj = bpy.context.object
     cam_obj.name = "render_cam"
     cam_obj.data.lens = 50
-    cam_obj.data.clip_end = distance * 10  # avoid far-plane clipping at these scales
+    cam_obj.data.clip_end = radius * 5  # avoid far-plane clipping at these scales
     bpy.context.scene.camera = cam_obj
 
-    for name, direction in CAMERA_DIRECTIONS:
-        dir_vec = Vector(direction).normalized()
+    for name, axis_role, sign, up_role, h_dim, v_dim in CAMERA_VIEWS:
+        if name == "oblique": continue
+        if axis_role is None:
+            # oblique: average of anterior + one lateral direction, so it
+            # doesn't depend on a single anatomical axis.
+            ap_idx, _ = axis_roles["anterior_posterior"]
+            ml_idx, _ = axis_roles["medial_lateral"]
+            dv_idx, _ = axis_roles["dorsal_ventral"]
+            dir_vec = (
+                unit_vector_for_axis(ap_idx, -1) * 0.7
+                + unit_vector_for_axis(ml_idx, +1) * 0.7
+                + unit_vector_for_axis(dv_idx, +1) * 0.4
+            ).normalized()
+        else:
+            axis_idx, _ = axis_roles[axis_role]
+            dir_vec = unit_vector_for_axis(axis_idx, sign)
+
+        up_axis_idx, _ = axis_roles[up_role]
+        # Blender's to_track_quat up-hint wants a named axis ("X"/"Y"/"Z"),
+        # not a vector -- map the anatomical up-role back to whichever
+        # world axis it corresponds to.
+        up_hint = "XYZ"[up_axis_idx]
+
+        margin = 0.8 if name == "dorsal" else 1.5 if name == "anterior" else 1.2
+        distance = distance_for_fov(cam_obj.data, axis_roles[h_dim][1], axis_roles[v_dim][1], margin=margin)
         location = center + dir_vec * distance
-        frame_camera_on_target(cam_obj, center, location)
+        frame_camera_on_target(cam_obj, center, location, up_hint=up_hint)
 
         out_path = out_dir / f"banc_{name}.png"
         bpy.context.scene.render.filepath = str(out_path)
-        print(f"Rendering '{name}' from {tuple(round(c, 2) for c in location)} at {cam_obj.rotation_euler} "
-              f"-> {out_path}")
+        print(f"Rendering '{name}' from {tuple(round(c, 2) for c in location)} "
+              f"(up hint: world {up_hint}) -> {out_path}")
         bpy.ops.render.render(write_still=True)
 
 
